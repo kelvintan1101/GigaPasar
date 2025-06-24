@@ -55,13 +55,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/connections', [PlatformConnectionController::class, 'index']);
         Route::get('/connections/stats', [PlatformConnectionController::class, 'getConnectionStats']);
         Route::get('/lazada/auth-url', [PlatformConnectionController::class, 'getLazadaAuthUrl']);
-        Route::post('/lazada/callback', [PlatformConnectionController::class, 'handleLazadaCallback']);
-    });
-});
-
-// Public Lazada callback route (outside authentication)
-Route::prefix('v1')->group(function () {
-    Route::post('/lazada/callback', [PlatformConnectionController::class, 'handleLazadaCallback']);
         Route::post('/connections/{connectionId}/test', [PlatformConnectionController::class, 'testConnection']);
         Route::delete('/connections/{connectionId}', [PlatformConnectionController::class, 'disconnect']);
     });
@@ -76,7 +69,7 @@ Route::prefix('v1')->group(function () {
     });
 });
 
-// Public Lazada callback route
+// Public Lazada callback route (outside authentication)
 Route::post('/lazada/callback', [PlatformConnectionController::class, 'handleLazadaCallback']);
 
 // Test route for checking API connectivity
