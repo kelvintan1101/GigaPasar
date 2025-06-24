@@ -39,7 +39,7 @@ return [
         'app_key' => env('LAZADA_APP_KEY'),
         'app_secret' => env('LAZADA_APP_SECRET'),
         'api_url' => env('LAZADA_API_URL', 'https://api.lazada.com/rest'),
-        'redirect_uri' => env('LAZADA_REDIRECT_URI', 'http://localhost:8001/api/v1/platform/lazada/callback'),
+        'redirect_uri' => env('LAZADA_REDIRECT_URI', 'https://techsolution11.online/api/lazada/callback'),
     ],
 
 ];

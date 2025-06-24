@@ -108,6 +108,11 @@ class PlatformConnectionController extends Controller
         try {
             // Decode state to get merchant ID
             $stateData = json_decode(base64_decode($request->state), true);
+            
+            if (!$stateData || !isset($stateData['merchant_id'])) {
+                throw new Exception('Invalid state parameter');
+            }
+            
             $merchantId = $stateData['merchant_id'];
 
             // Exchange code for token
