@@ -55,8 +55,7 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/connections', [PlatformConnectionController::class, 'index']);
         Route::get('/connections/stats', [PlatformConnectionController::class, 'getConnectionStats']);
         Route::get('/lazada/auth-url', [PlatformConnectionController::class, 'getLazadaAuthUrl']);
-        Route::post('/connections/{connectionId}/test', [PlatformConnectionController::class, 'testConnection']);
-        Route::delete('/connections/{connectionId}', [PlatformConnectionController::class, 'disconnect']);
+        Route::post('/lazada/callback', [PlatformConnectionController::class, 'handleLazadaCallback']);
     });
     
     // Product sync routes
@@ -67,9 +66,13 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
         Route::get('/statistics', [ProductSyncController::class, 'getSyncStatistics']);
         Route::get('/logs', [ProductSyncController::class, 'getSyncLogs']);
     });
+    
+    // Platform connection management routes
+    Route::post('/connections/{connectionId}/test', [PlatformConnectionController::class, 'testConnection']);
+    Route::delete('/connections/{connectionId}', [PlatformConnectionController::class, 'disconnect']);
 });
 
-// Public Lazada callback route (outside authentication)
+// Public Lazada callback route
 Route::post('/lazada/callback', [PlatformConnectionController::class, 'handleLazadaCallback']);
 
 // Test route for checking API connectivity
